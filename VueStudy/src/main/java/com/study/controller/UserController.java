@@ -1,11 +1,7 @@
 package com.study.controller;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import io.swagger.annotations.*;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/swagger")
@@ -14,12 +10,12 @@ public class UserController {
 
     @GetMapping("/get")
     @ApiOperation(value = "get方法的描述",notes = "get方法的笔记")
-    public String get(String username,String password){
+    @ApiImplicitParams(value = { @ApiImplicitParam(name = "用户名",value = "用于新增的用户名",paramType = "body",dataType = "String",required = true,example = "admin"),
+            @ApiImplicitParam(name = "密码",value = "用于新增的密码",paramType = "body",dataType = "String",required = true,example = "admin")}
+    )
+
+    public String get(@RequestBody String username,@RequestBody String password){
         return "get";
     }
 
-    @PostMapping("/post")
-    public String post(int a,int b){
-        return "post";
-    }
 }
